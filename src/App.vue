@@ -8,7 +8,7 @@
           :checkToggle="checkToggle"
           :deleteItem="deleteItem"
         />
-        <ListFooter :todos="todos" :checkAll="checkAll" />
+        <ListFooter :todos="todos" :checkAll="checkAll" :clearAll="clearAll"/>
       </div>
     </div>
   </div>
@@ -72,6 +72,11 @@ export default {
         }
       });
     },
+
+    // 删除全部
+    clearAll(){
+      this.todos = []
+    }
   },
   components: {
     ListHeader,

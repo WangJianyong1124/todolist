@@ -1,20 +1,22 @@
 <template>
-  <div class="todo-footer">
+  <div class="todo-footer" v-if="total > 0">
     <label>
       <input type="checkbox" :checked="isAllCheck" @click="checkAllIPL"/>
     </label>
     <span>
       <span>已完成 {{ successful }}</span> / 全部 {{ total }}
     </span>
-    <button class="btn btn-danger">清除已完成任务</button>
+    <button class="btn btn-danger" v-on:click="clearAllIPL">清除已完成任务</button>
+  </div>
+  <div v-else>
+    <h1>还没有制定任务哦 赶紧添加吧!!!</h1>
   </div>
 </template>
 
 <script>
 export default {
   name: "ListFooter",
-  props: ["todos", "checkAll"],
- 
+  props: ["todos", "checkAll", "clearAll"],
   computed: {
     successful() {
       return this.todos.reduce(
@@ -35,6 +37,10 @@ export default {
   methods: {
     checkAllIPL(e){
      this.checkAll(e.target.checked);
+    },
+
+    clearAllIPL(){
+      this.clearAll()
     }
   }
 };
