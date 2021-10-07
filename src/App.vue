@@ -2,8 +2,8 @@
   <div id="root">
     <div class="todo-container">
       <div class="todo-wrap">
-        <ListHeader />
-        <ListMain />
+        <ListHeader :add="add"/>
+        <ListMain :todos="todos" />
         <ListFooter />
       </div>
     </div>
@@ -17,11 +17,27 @@ import ListHeader from "./components/Header/ListHeader";
 import ListMain from "./components/Main/ListMain";
 // 导入ListFooter组件
 import ListFooter from "./components/Footer/ListFooter";
+// 随机生成id
+import { nanoid } from "nanoid";
 
 export default {
   name: "App",
   data() {
-    return {}
+    return {
+      todos: [
+        { id: nanoid(), title: "吃饭", isDone: false },
+        { id: nanoid(), title: "睡觉", isDone: true },
+        { id: nanoid(), title: "打豆豆", isDone: false },
+      ],
+    };
+  },
+  methods: {
+    add(title){
+      // 保存新数据
+      const newData = {id: nanoid(), title: title, isDone: false}
+      // 将新数据添加到todos中
+      this.todos.unshift(newData)
+    }
   },
   components: {
     ListHeader,
