@@ -2,10 +2,14 @@
   <div>
     <li v-for="todo in todos" :key="todo.id">
       <label>
-        <input type="checkbox" :checked="todo.isDone" />
+        <input
+          type="checkbox"
+          :checked="todo.isDone"
+          @click="checkToggleIPL(todo.id)"
+        />
         <span>{{ todo.title }}</span>
       </label>
-      <button class="btn btn-danger" style="display: none">删除</button>
+      <button class="btn btn-danger" @click="deleteItemIPL(todo.id)">删除</button>
     </li>
   </div>
 </template>
@@ -13,7 +17,16 @@
 <script>
 export default {
   name: "ListItem",
-  props: ["todos"]
+  props: ["todos", "checkToggle", "deleteItem"],
+  methods: {
+    checkToggleIPL(id) {
+      this.checkToggle(id);
+    },
+
+    deleteItemIPL(id){
+      this.deleteItem(id)
+    }
+  },
 };
 </script>
 
@@ -43,6 +56,10 @@ li button {
   float: right;
   display: none;
   margin-top: 3px;
+}
+
+li:hover button {
+  display: block;
 }
 
 li:before {

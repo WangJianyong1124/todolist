@@ -2,8 +2,12 @@
   <div id="root">
     <div class="todo-container">
       <div class="todo-wrap">
-        <ListHeader :add="add"/>
-        <ListMain :todos="todos" />
+        <ListHeader :add="addItem" />
+        <ListMain
+          :todos="todos"
+          :checkToggle="checkToggle"
+          :deleteItem="deleteItem"
+        />
         <ListFooter />
       </div>
     </div>
@@ -32,18 +36,37 @@ export default {
     };
   },
   methods: {
-    add(title){
+    // 增加待做项
+    addItem(title) {
       // 保存新数据
-      const newData = {id: nanoid(), title: title, isDone: false}
+      const newData = { id: nanoid(), title: title, isDone: false };
       // 将新数据添加到todos中
-      this.todos.unshift(newData)
-    }
+      this.todos.unshift(newData);
+    },
+
+    // 勾选/取消勾选待做项
+    checkToggle(id) {
+      this.todos.forEach((todo) => {
+        if (todo.id === id) {
+          todo.isDone = !todo.isDone;
+        }
+      });
+    },
+
+    // 删除待做项
+    deleteItem(id) {
+      if (confirm("确定删除嘛?")) {
+        this.todos = this.todos.filter((todo) => {
+          return todo.id !== id;
+        });
+      }
+    },
   },
   components: {
     ListHeader,
     ListMain,
-    ListFooter
-  }
+    ListFooter,
+  },
 };
 </script>
 
@@ -91,6 +114,4 @@ body {
   border: 1px solid #ddd;
   border-radius: 5px;
 }
-
-
 </style>

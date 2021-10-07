@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="todo-main">
-      <ListItem :todos="todos" />
+      <ListItem :todos="todos" :checkToggle="checkToggle" :deleteItem="deleteItem"/>
     </ul>
   </div>
 </template>
@@ -12,7 +12,7 @@ import ListItem from "./child/ListItem.vue";
 
 export default {
   name: "ListMain",
-  props: ["todos"],
+  props: ["todos", "checkToggle", "deleteItem"],
   components: {
     ListItem,
   },
