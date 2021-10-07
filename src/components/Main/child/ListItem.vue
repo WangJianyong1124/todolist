@@ -1,16 +1,19 @@
 <template>
-  <li>
-    <label>
-      <input type="checkbox" />
-      <span>xxxxx</span>
-    </label>
-    <button class="btn btn-danger" style="display: none">删除</button>
-  </li>
+  <div>
+    <li v-for="todo in todos" :key="todo.id">
+      <label>
+        <input type="checkbox" :checked="todo.isDone" />
+        <span>{{ todo.title }}</span>
+      </label>
+      <button class="btn btn-danger" style="display: none">删除</button>
+    </li>
+  </div>
 </template>
 
 <script>
 export default {
   name: "ListItem",
+  props: ["todos"]
 };
 </script>
 

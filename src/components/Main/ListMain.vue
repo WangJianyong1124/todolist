@@ -1,18 +1,31 @@
 <template>
-  <ul class="todo-main">
-    <ListItem />
-  </ul>
+  <div>
+    <ul class="todo-main">
+      <ListItem :todos="todos" />
+    </ul>
+  </div>
 </template>
 
 <script>
 // 导入子组件Item
-import ListItem from './child/ListItem.vue'
+import ListItem from "./child/ListItem.vue";
+// 随机生成id
+import { nanoid } from "nanoid";
 
 export default {
   name: "ListMain",
+  data() {
+    return {
+      todos: [
+        { id: nanoid(), title: "吃饭", isDone: false },
+        { id: nanoid(), title: "睡觉", isDone: true },
+        { id: nanoid(), title: "打豆豆", isDone: false },
+      ],
+    };
+  },
   components: {
-    ListItem
-  }
+    ListItem,
+  },
 };
 </script>
 
