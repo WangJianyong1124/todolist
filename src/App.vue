@@ -8,7 +8,7 @@
           :checkToggle="checkToggle"
           :deleteItem="deleteItem"
         />
-        <ListFooter />
+        <ListFooter :todos="todos" :checkAll="checkAll" />
       </div>
     </div>
   </div>
@@ -60,6 +60,17 @@ export default {
           return todo.id !== id;
         });
       }
+    },
+
+    // 全选
+    checkAll(isCheck) {
+      this.todos.forEach((todo) => {
+        if (isCheck) {
+          todo.isDone = true;
+        } else {
+          todo.isDone = false;
+        }
+      });
     },
   },
   components: {

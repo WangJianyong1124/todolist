@@ -1,9 +1,11 @@
 <template>
   <div class="todo-footer">
     <label>
-      <input type="checkbox" />
+      <input type="checkbox" :checked="isAllCheck" @click="checkAllIPL"/>
     </label>
-    <span> <span>已完成0</span> / 全部2 </span>
+    <span>
+      <span>已完成 {{ successful }}</span> / 全部 {{ total }}
+    </span>
     <button class="btn btn-danger">清除已完成任务</button>
   </div>
 </template>
@@ -11,6 +13,30 @@
 <script>
 export default {
   name: "ListFooter",
+  props: ["todos", "checkAll"],
+ 
+  computed: {
+    successful() {
+      return this.todos.reduce(
+        (pre, current) => pre + (current.isDone ? 1 : 0),
+        0
+      );
+    },
+    total() {
+      return this.todos.length;
+    },
+    isAllCheck() {
+      if (this.successful === this.total) {
+        return 1;
+      }
+      return 0
+    },
+  },
+  methods: {
+    checkAllIPL(e){
+     this.checkAll(e.target.checked);
+    }
+  }
 };
 </script>
 
